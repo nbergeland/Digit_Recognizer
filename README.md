@@ -1,7 +1,7 @@
 # Digit_Recognizer
 Summary: 
  
-This week for our assignment I built an algorithm trained to recognize images of numerical digits 1-10.  The model I built tested at 99.175% recognition, which was good enough for 378 / 1806 (top 21%). 
+This is the code I built for an algorithm trained to recognize images of numerical digits 1-10.  The model I built tested at 99.175% recognition, which was good enough for 378 / 1806 (top 21%) in the corresponding Kaggle competition. 
  	The model was built and trained with a combination of matplotlib, numpy, seaborne, tenorflow, SKlearn, and Keras.  I first read in the testing and training datasets for the various models to work with.  From this point, I began understanding the dataset with some basic EDA.    	To perform the basic analysis, I used a graph within matplotlib to see the occurrence of different numbers.  Is the dataset normally distributed?  After observing the normality (shape) of the dataset, I got to work.  The work involved some simple encoding, then creation of different layers of the CNN model.   
  	The thing I was not prepared for was how time intensive the model was.  Each different visualization model took 45-60 minutes to run through all of the sequences of testing.  I found it fascinating to watch the model simulate through “epochs” of data and continually improve itself with no guidance provided by me.   
  	The result was just as impressive.  With no structure provided by me, the model was recognizing nearly every number it was presented with.  One could argue the 99 + % success rate may be below a human, which would likely get all of the numbers.  However, with no prior learning and in such a short period, it is truly shocking the success the model was able to develop given the timeframe. 
