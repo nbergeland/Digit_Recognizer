@@ -1,11 +1,93 @@
-# Digit_Recognizer
-Summary: 
- 
-This is the code I built for an algorithm trained to recognize images of numerical digits 1-10.  The model I built tested at 99.175% recognition, which was good enough for 378 / 1806 (top 21%) in the corresponding Kaggle competition. 
- 	The model was built and trained with a combination of matplotlib, numpy, seaborne, tenorflow, SKlearn, and Keras.  I first read in the testing and training datasets for the various models to work with.  From this point, I began understanding the dataset with some basic EDA.    	To perform the basic analysis, I used a graph within matplotlib to see the occurrence of different numbers.  Is the dataset normally distributed?  After observing the normality (shape) of the dataset, I got to work.  The work involved some simple encoding, then creation of different layers of the CNN model.   
- 	The thing I was not prepared for was how time intensive the model was.  Each different visualization model took 45-60 minutes to run through all of the sequences of testing.  I found it fascinating to watch the model simulate through “epochs” of data and continually improve itself with no guidance provided by me.   
- 	The result was just as impressive.  With no structure provided by me, the model was recognizing nearly every number it was presented with.  One could argue the 99 + % success rate may be below a human, which would likely get all of the numbers.  However, with no prior learning and in such a short period, it is truly shocking the success the model was able to develop given the timeframe. 
- 	
+# Digit_Recognizer Overview
+The Digit Recognizer is a machine learning system designed to identify handwritten digits (0-9) using Convolutional Neural Networks (CNNs). This page provides a high-level introduction to the system's architecture, data processing pipeline, model structure, and workflows. For detailed information on specific components, please refer to the dedicated pages linked throughout this document.
+
+## System Purpose and Scope
+This system enables the recognition of handwritten digits with high accuracy using deep learning techniques. It includes components for data preprocessing, model training, and inference (prediction). The implementation uses the MNIST dataset for training and can classify previously unseen digit images.
+
+## System Architecture Overview
+![Screenshot](sao.png)
+The system consists of two primary workflows:
+
+1. Training Pipeline (bottom flow): Processes the MNIST dataset to train the CNN model
+2. Inference Pipeline (top flow): Uses the trained model to recognize new digit images
+The trained model connects these workflows, enabling digit recognition based on learned patterns.
+
+## Data Processing Pipeline
+![Screenshot](dpp.png)
+
+The data processing pipeline prepares raw digit images for model consumption through these key steps:
+
+Step	Purpose	Implementation
+Normalization	Scale pixel values to [0,1] range	Division by 255
+Reshaping	Format data for CNN input	Convert to 28×28×1 tensors
+Augmentation	Increase training data variety	Apply transformations (optional)
+Label Encoding	Convert numeric labels to vectors	One-hot encoding (e.g., 5 → [0,0,0,0,0,1,0,0,0,0])
+
+## CNN Model Architecture
+![Screenshot](cnn.png)
+
+The CNN architecture consists of three convolutional blocks followed by fully connected layers:
+
+Convolutional Blocks: Each includes:
+
+1. Convolutional layer with increasing filter counts (64→128→256)
+
+- Batch normalization for training stability
+- ReLU activation for non-linearity
+- Max pooling for dimensionality reduction
+
+2. Fully Connected Layers:
+
+- Flattened convolutional output
+- Two dense layers (64 and 32 neurons)
+- Dropout layers (0.25) for regularization
+- Output layer with 10 neurons and softmax activation
+
+## Training and Inference Workflows
+
+### Training Workflow
+The training process involves:
+
+- Loading and preprocessing the MNIST dataset
+- Splitting data into training and validation sets
+- Model training with backpropagation
+- Performance evaluation on validation data
+- Hyperparameter tuning to optimize performance
+
+### Inference Workflow
+The inference process for new images includes:
+
+- Image preprocessing using the same pipeline as training
+- Feature extraction through the convolutional layers
+- Classification using the trained model
+- Output of predicted digit and confidence score
+
+## Model Evaluation Metrics
+![Screenshot](mem.png)
+
+The model's performance is assessed using standard classification metrics:
+
+Metric			Description					Relevance
+Accuracy		Overall correct predictions			Primary metric for balanced dataset
+Precision		Correctness of positive predictions		Important for specific digit reliability
+Recall			Ability to find all instances of a digit	Key for comprehensive detection
+F1-Score		Harmonic mean of precision and recall		Balanced metric for overall performance
+Confusion Matrix	Visualization of prediction errors		Identifies problematic digit pairs
+
+## Key Components and Relationships
+The system's modular design enables separate development and optimization of each component:
+
+1. Data Pipeline: Handles data loading, preprocessing, and augmentation
+2. Model Architecture: Defines the CNN structure and parameters
+3. Training System: Manages model training, validation, and hyperparameter tuning
+4. Inference Engine: Applies the trained model to new digit images
+5. Evaluation Framework: Assesses model performance using multiple metrics
+
+
+
+
+
+
  
 	Appendix: 
 	 
